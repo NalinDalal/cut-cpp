@@ -1,10 +1,46 @@
 # cut-cpp
 
-This is the cut-cpp project.
+A C++ implementation of the `cut` command for extracting fields and characters from text.
 
 # Building and installing
 
 See the [BUILDING](BUILDING.md) document.
+
+## Quick Start
+
+```bash
+# Configure
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+# Build
+cmake --build build --config Release
+
+# Run
+./build/cut-cpp --help
+```
+
+## Usage
+
+```bash
+# Extract fields 1 and 3 (tab-delimited)
+echo -e "one\ttwo\tthree" | ./build/cut-cpp -f 1,3
+# Output: one  three
+
+# Extract with custom delimiter
+echo "a:b:c:d" | ./build/cut-cpp -d : -f 2,4
+# Output: b:d
+
+# Extract characters 1-5
+echo "hello world" | ./build/cut-cpp -c 1-5
+# Output: hello
+
+# From file
+./build/cut-cpp -f 1,3 data.txt
+
+# Suppress lines without delimiter
+echo -e "a,b,c\nd" | ./build/cut-cpp -d , -f 1 -s
+# Output: a
+```
 
 # Contributing
 
