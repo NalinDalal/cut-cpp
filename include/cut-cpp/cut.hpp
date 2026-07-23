@@ -50,14 +50,14 @@ public:
   auto error_message() const -> std::string const&;
 
 private:
-  auto split_by_delimiter(std::string const& line, char delimiter)
-      -> std::vector<std::string>;
-  auto extract_fields(std::string const& line, cut_options const& opts)
-      -> std::string;
-  auto extract_characters(std::string const& line, cut_options const& opts)
-      -> std::string;
-  auto is_in_range(int index, std::vector<std::pair<int, int>> const& ranges)
-      -> bool;
+  auto split_by_delimiter(std::string const& line,
+                          char delimiter) -> std::vector<std::string>;
+  auto extract_fields(std::string const& line,
+                      cut_options const& opts) -> std::string;
+  auto extract_characters(std::string const& line,
+                          cut_options const& opts) -> std::string;
+  auto is_in_range(int index,
+                   std::vector<std::pair<int, int>> const& ranges) -> bool;
 
   std::string m_error;
 };

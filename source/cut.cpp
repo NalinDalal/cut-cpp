@@ -176,8 +176,9 @@ auto cut_parser::parse_char_spec(std::string const& spec) -> bool
   return true;
 }
 
-auto cut_parser::parse_range(std::string const& range_str, int& start, int& end)
-    -> bool
+auto cut_parser::parse_range(std::string const& range_str,
+                             int& start,
+                             int& end) -> bool
 {
   if (range_str.empty()) {
     return false;
@@ -337,9 +338,8 @@ auto cut_processor::extract_characters(std::string const& line,
   return result;
 }
 
-auto cut_processor::is_in_range(int index,
-                                std::vector<std::pair<int, int>> const& ranges)
-    -> bool
+auto cut_processor::is_in_range(
+    int index, std::vector<std::pair<int, int>> const& ranges) -> bool
 {
   for (auto const& [start, end] : ranges) {
     if (index >= start && (end == -1 || index <= end)) {
