@@ -326,6 +326,13 @@ auto cut_processor::split_by_delimiter(std::string const& line, char delimiter) 
 
 auto cut_processor::extract_fields(std::string const& line, cut_options const& opts) -> std::string
 {
+  bool has_delimiter = line.find(opts.delimiter) != std::string::npos;
+
+  if (!has_delimiter && opts.suppress_non_delimited)
+  {
+    return "";
+  }
+
   auto fields = split_by_delimiter(line, opts.delimiter);
   std::string result;
   bool first = true;
