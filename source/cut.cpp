@@ -136,11 +136,24 @@ auto cut_parser::options() const -> cut_options const&
 auto cut_parser::parse_field_spec(std::string const& spec) -> bool
 {
   m_options.ranges.clear();
+
+  if (spec.empty() || spec.front() == ',' || spec.back() == ',')
+  {
+    m_error = "invalid field specification: '" + spec + "'";
+    return false;
+  }
+
   std::istringstream stream(spec);
   std::string token;
 
   while (std::getline(stream, token, ','))
   {
+    if (token.empty())
+    {
+      m_error = "invalid field specification: '" + spec + "'";
+      return false;
+    }
+
     int start = 0;
     int end = 0;
 
@@ -154,10 +167,10 @@ auto cut_parser::parse_field_spec(std::string const& spec) -> bool
   }
 
   if (m_options.ranges.empty())
-    {
-      m_error = "invalid field specification: '" + spec + "'";
-      return false;
-    }
+  {
+    m_error = "invalid field specification: '" + spec + "'";
+    return false;
+  }
 
   return true;
 }
@@ -165,11 +178,24 @@ auto cut_parser::parse_field_spec(std::string const& spec) -> bool
 auto cut_parser::parse_char_spec(std::string const& spec) -> bool
 {
   m_options.ranges.clear();
+
+  if (spec.empty() || spec.front() == ',' || spec.back() == ',')
+  {
+    m_error = "invalid byte specification: '" + spec + "'";
+    return false;
+  }
+
   std::istringstream stream(spec);
   std::string token;
 
   while (std::getline(stream, token, ','))
   {
+    if (token.empty())
+    {
+      m_error = "invalid byte specification: '" + spec + "'";
+      return false;
+    }
+
     int start = 0;
     int end = 0;
 
